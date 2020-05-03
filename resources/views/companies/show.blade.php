@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container col-md-9 col-lg-9 col-ms-9 pull-left">
   <div class="jumbotron">
     <h1>{{$result->name}}</h1>
     <p class="lead">
       {{$result->description}}
     </p>
   </div>
-  <div class="row">
-    
+  <div class="row" style="background: white; margin:10px">
+
     @foreach($result->projects as $project)
     <div class="col-lg-4">
       <h2 class="">{{$project->name}}</h2>
@@ -19,4 +19,21 @@
 
   </div>
 </div>
+<div class="col-md-3 col-lg-3 com-sm-3 pull-right">
+  <div class="sidebar-model">
+    <h4>Actions</h4>
+    <ol class="list-unstyled">
+      <li><a href="/companies/{{$result->id}}/edit">Edit</a> </li>
+      <li><a href="#">Delete</a> </li>
+      <li><a href="#">Add a Memmbers</a> </li>
+    </ol>
+  </div>
+  <!-- <div class="sidebar-model">
+    <h4></h4>
+    <ol class="unstyled">
+      <li></li>
+    </ol>
+  </div> -->
+</div>
+
 @endsection
