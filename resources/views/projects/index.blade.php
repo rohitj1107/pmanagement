@@ -9,7 +9,7 @@
         </div>
           <div class="panel-body">
             <ul class="list-group">
-              @foreach($companies as $company)
+              @foreach($projects as $company)
               <li class="list-group-item"><a href="/companies/{{ $company->id }}"> {{ $company->name }}</li>
               @endforeach
             </ul>

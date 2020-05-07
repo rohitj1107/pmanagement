@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompaniesController extends Controller
 {
@@ -15,8 +16,13 @@ class CompaniesController extends Controller
     public function index()
     {
         //
-        $companies = Company::all();
-        return view('companies.index',['companies'=>$companies]);
+        if (Auth::check()) {
+          $companies = Company::where('user_id',Auth::user()->id)->get();
+          // $companies = Company::All();
+          return view('companies.index',['companies'=>$companies]);
+        }
+        return view('auth.login');
+
     }
 
     /**
@@ -27,6 +33,7 @@ class CompaniesController extends Controller
     public function create()
     {
         //
+        return view('companies.create');
     }
 
     /**
@@ -38,6 +45,16 @@ class CompaniesController extends Controller
     public function store(Request $request)
     {
         //
+        $company = company::create([
+          'name' => $request->input('name'),
+          'description' => $request->input('description'),
+          'user_id' => Auth::user()->id
+        ]);
+
+        if ($company) {
+            return redirect()->route('companies.show',['company'=>$company->id])->with('success','Company Create successfully!');
+        }
+        return back()->withInput()->with('errors','Error create new comapny');
     }
 
     /**
@@ -98,5 +115,11 @@ class CompaniesController extends Controller
     public function destroy(company $company)
     {
         //
+        $findCompany = Company::find( $company->id);
+        if($findCompany->delete()){
+        	return redirect()->route('companies.index')->with('success','company deleted succesfully');
+        }
+
+        return back()->withInput()->with('error','Company could not be deleted');
     }
 }

@@ -7,7 +7,7 @@
       {{$result->description}}
     </p>
   </div>
-  <a href="/project/create/{{$result->id}}" class="pull-right btn-sm btn btn-primary" >Add Projects</a>
+  <a href="/project/create" class="pull-right btn-sm btn btn-primary" >Add Projects</a>
 
   <div class="row" style="background: white; margin:10px">
 
@@ -39,7 +39,7 @@
         </form>
 
        </li>
-      <li><a href="/project/create/{{$result->id}}">Add Project</a> </li>
+      <li><a href="/project/create/">Add Project</a> </li>
       <li><a href="/companies/create/">Create a New Company</a> </li>
       <li><a href="/companies/">My companys</a> </li>
 

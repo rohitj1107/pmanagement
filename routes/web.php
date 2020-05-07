@@ -23,3 +23,5 @@ Route::resource('project','ProjectsController');
 Route::resource('roles','RolesController');
 Route::resource('task','TasksController');
 Route::resource('users','UsersController');
+
+Route::get('/project/create/{companyid?}','ProjectsController@create');
